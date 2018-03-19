@@ -20,6 +20,8 @@
       <div class="_title">@{{'提莫'}}</div>
       <div>这是五个字这是五个字这是五个字这是五个字这是五个字这是五个字这是五个字这是五个字</div>
     </div>
+    <progress class="absolute" :percent='50'
+      color="pink" stroke-width="2"/>
   </div>
 </template>
 
@@ -57,7 +59,7 @@ export default {
      * 开始播放，供外部调用
      */
     start () {
-      this._audio.play()
+      // this._audio.play()
     },
     /**
      * 暂停播放，供外部调用
@@ -102,15 +104,16 @@ export default {
 
 @dis: 10px;
 .tag {
-  top: 0;
+  top: 20px;
   right: 0;
+  font-size: @font;
   padding: @dis;
   z-index: 1;
 }
 
 .info {
   left: @dis;
-  bottom: @btm-height;
+  bottom: @btm-height + 30px;
   width: 250px;
   text-align: left;
   font-size: @font;
@@ -140,9 +143,16 @@ export default {
   }
 }
 
+progress {
+  bottom: @btm-height;
+  width: 100%;
+}
+
 .absolute {
   position: absolute;
   color: @white;
   z-index: 1;
 }
+
+
 </style>

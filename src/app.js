@@ -11,7 +11,7 @@ app.$mount()
 
 export default {
   config: {
-    pages: [ '^pages/mine/mine' ],
+    pages: [ '^pages/index/index' ],
     window: {
       backgroundTextStyle: 'light',
       navigationBarBackgroundColor: '#000000',

@@ -13,4 +13,7 @@ yarn-error.log*
 *.sln
 
 # 自定义目录
-mpvue*
+/mpvue*
+
+# 文档目录
+/doc
