@@ -1,5 +1,5 @@
 <template>
-  <ul class="mengbar"  :class="{ bgBlack: 'index' !== type }">
+  <ul class="mengbar" :style="{ background }">
     <li @click="go" data-type='index'>
       <span :class="{ active: 'index' === type }"
         >萌片</span>
@@ -28,6 +28,10 @@ export default {
     type: {
       type: String,
       default: 'index'
+    },
+    background: {
+      type: String,
+      default: '#000'
     }
   },
   data () {
@@ -46,9 +50,6 @@ export default {
 
 <style lang="less" scoped>
 @import url(../global.less);
-.bgBlack {
-  background: #000000;
-}
 .mengbar {
   display: flex;
   position: fixed;

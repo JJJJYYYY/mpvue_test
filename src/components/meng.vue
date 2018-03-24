@@ -1,18 +1,19 @@
 <template>
   <div class="meng">
     <span class="tag absolute">
-      {{ current }} / {{content.content.length}}
+      {{ current + 1 }} / {{content.content.length}}
     </span>
-    <swiper class="swiper" autoplay :duration='2'
-      @change="swiperChange">
+    <swiper class="swiper" :autoplay="playing"
+      :current="current" :interval="3000" @change="swiperChange">
       <swiper-item v-for="(item, index) in content.content" :key="index">
-        <img class="_image" :src='item.img' mode='aspectFit'/>
+        <img class="_image" :src='item.img' mode='widthFix'/>
       </swiper-item>
     </swiper>
     <div class="menu absolute">
       <div @click="stop"><icon type="success" size="30" /></div>
       <div><icon type="waiting" size="30" /></div>
-      <div><icon type="download" size="30" /></div>
+      <div><icon type="download" size="30"
+        @click="showComment(3)" /></div>
       <div><icon type="search" size="30" /></div>
       <div><icon type="clear" size="30" /></div>
     </div>
@@ -32,7 +33,8 @@ export default {
   },
   data () {
     return {
-      current: 1
+      current: 1,
+      playing: false
     }
   },
   created () {
@@ -53,13 +55,18 @@ export default {
   },
   methods: {
     swiperChange ({ target }) {
-      this.current = target.current + 1
+      this.current = target.current
+    },
+    showComment (id) {
+      this.$emit('show-comment', id)
     },
     /**
      * 开始播放，供外部调用
      */
     start () {
       // this._audio.play()
+      this.current = 0
+      this.playing = true
     },
     /**
      * 暂停播放，供外部调用
@@ -72,6 +79,8 @@ export default {
      */
     stop () {
       this._audio.pause()
+      this.current = 1
+      this.playing = false
     },
 
     _play () {
@@ -90,16 +99,19 @@ export default {
 <style lang="less" scoped>
 @import url(../global.less);
 
-.meng, .swiper, ._image {
-  width: 100%;
-  height: 100%;
+.meng, .swiper, swiper-item, ._image {
+  width: 100vw;
+  height: 100vh;
 }
-.meng {
-  position: relative;
+.swiper, ._image {
+  z-index: 0;
 }
 
-.swiper, swiper-item, ._image {
-  z-index: -1;
+._image {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 @dis: 10px;
@@ -153,6 +165,4 @@ progress {
   color: @white;
   z-index: 1;
 }
-
-
 </style>

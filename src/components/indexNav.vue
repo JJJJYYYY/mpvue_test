@@ -38,7 +38,7 @@ export default {
     },
     changeFrom (from) {
       this.from = from
-      this.$emit('change-from')
+      this.$emit('change-from', from)
     }
   }
 }
@@ -80,6 +80,7 @@ export default {
   width: 100vw;
   justify-content: center;
   font-size: @font;
+  line-height: @font + 2px;
 
   > span {
     margin: 1px 5px;
