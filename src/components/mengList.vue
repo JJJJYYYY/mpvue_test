@@ -1,20 +1,9 @@
 <template>
-  <div class="list">
-    <ul class="_left">
-      <li v-for="(item, index) in leftList" :key='index'>
-        <div :class="{short: index % 2}">
-          <img class="__cover" :src="item.cover" />
-        </div>
-      </li>
-    </ul>
-    <ul class="_right">
-      <li v-for="(item, index) in rightList" :key='index'>
-        <div :class="{short: (index + 1) % 2}">
-          <img class="__cover" :src="item.cover" />
-        </div>
-      </li>
-    </ul>
-  </div>
+  <ul class="list">
+    <li v-for="(item, index) in list" :key='index'>
+      <img class="_cover" :src="item.cover" mode='widthFix' />
+    </li>
+  </ul>
 </template>
 
 <script>
@@ -23,29 +12,26 @@ import list from '../data/mengList'
 export default {
   data () {
     return {
-      leftList: list,
-      rightList: list
-    }
-  },
-  methods: {
-    getHeight (index) {
-      return `${index % 2 ? 100 : 120}px`
+      list: list
     }
   }
 }
 </script>
 
 <style lang="less" scoped>
+
+@gap: 0.4vw;
 .list {
-  display: flex;
+  column-count: 2;
+  column-gap: @gap;
+
+  li {
+    break-inside: avoid;
+    font-size: 0;
+    margin-bottom: @gap;
+  }
 }
-._left, ._right {
-  flex: 1;
-  width: 50vw;
-  display: flex;
-  flex-direction: column;
-}
-.__cover {
+._cover {
   max-height: 100%;
   max-width: 100%;
 }

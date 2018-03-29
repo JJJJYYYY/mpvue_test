@@ -66,6 +66,9 @@ export default {
     }
 
     this.$refs.meng[this.current].start()
+  },
+  unmounted () {
+    this.$refs.meng[this.current].stop()
   }
 }
 </script>
