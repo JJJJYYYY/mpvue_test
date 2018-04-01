@@ -1,6 +1,6 @@
 <template>
   <div class="mine">
-    <div class="info">
+    <div class="circle_background">
       <img src="http://pic1.win4000.com/mobile/5/59705d3a76aec.png">
       <h3>坏猫先生</h3>
       <small>已有{{2}}张萌卡</small>
@@ -74,6 +74,7 @@ export default {
 
 <style lang="less" scoped>
 @import url(../../global.less);
+
 .mine {
   position: fixed;
   top: 0;
@@ -82,21 +83,8 @@ export default {
   overflow-x: hidden;
   overflow-y: scroll;
 }
-.info {
+.circle_background {
   @head-size: 70px;
-  text-align: center;
-  height: 160px;
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: @primary;
-    z-index: -1;
-  }
 
   img {
     width: @head-size;
@@ -109,18 +97,6 @@ export default {
   small {
     color: @gray;
     font-size: @font;
-  }
-
-  &::after {
-    content: '';
-    position: absolute;
-    top: 50px;
-    left: -50vw;
-    width: 200vw;
-    height: 200vw;
-    border-radius: 50%;
-    background: @white;
-    z-index: -1;
   }
 }
 .menu {

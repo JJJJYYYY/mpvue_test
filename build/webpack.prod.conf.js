@@ -78,7 +78,7 @@ var webpackConfig = merge(baseWebpackConfig, {
           /\.js$/.test(module.resource) &&
           module.resource.indexOf('node_modules') >= 0
         )
-      }
+      } || count >= 2
     }),
     // extract webpack runtime and module manifest to its own file in order to
     // prevent vendor hash from being updated whenever app bundle is updated

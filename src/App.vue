@@ -17,4 +17,33 @@ export default {
   font-size: @font-sm;
   background: @primary;
 }
+
+
+.circle_background {
+  text-align: center;
+  height: 160px;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: @primary;
+    z-index: -1;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50px;
+    left: -50vw;
+    width: 200vw;
+    height: 200vw;
+    border-radius: 50%;
+    background: @white;
+    z-index: -1;
+  }
+}
 </style>

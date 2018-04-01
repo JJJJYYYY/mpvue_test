@@ -25,6 +25,8 @@
 </template>
 
 <script>
+import { createStyle } from '@/utils/utils'
+
 let defaultStyle = {
   style: {
     backgroundImage: 'url(https://thumbnail10.baidupcs.com/thumbnail/31b08b280c89c1348e02e1b260266258?fid=454881984-250528-257546835432287&time=1522332000&rt=pr&sign=FDTAER-DCb740ccc5511e5e8fedcff06b081203-ASfRTOG4PtCTflO1lMiO%2faA02HI%3d&expires=8h&chkbd=0&chkv=0&dp-logid=2039133953440965348&dp-callid=0&size=c1440_u900&quality=90&vuk=454881984&ft=image)',
@@ -138,10 +140,6 @@ let defaultStyle = {
       }
     }
   }
-}
-
-function createStyle (style) {
-  return style ? Object.keys(style).map(key => `${key.replace(/([A-Z])/g, '-$1').toLowerCase()}:${style[key]};`).join('') : ''
 }
 
 const defaultSize = 100

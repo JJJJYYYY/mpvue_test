@@ -1,52 +1,63 @@
 <template>
-  <div>
-    <div class="top">
-      <div class="from">
-        <span :class="{active: from === 'hot'}"
-          @click="changeFrom('hot')"
-          >皮肤中心</span>
-        <span>|</span>
-        <span :class="{active: from === 'nearby'}"
-          @click="changeFrom('nearby')"
-          >兑换奖品</span>
+  <div class="discovery">
+    <div class="background">
+      <search></search>
+      <div class="container">
+        <div class="_title">
+          <h5>名门望族</h5>
+          <span>查看更多</span>
+        </div>
+        <panel :list="list4"></panel>
       </div>
-      <swiper class="cards"
-        previous-margin="42rpx" next-margin="50rpx">
-        <swiper-item class="_item"
-          v-for="(item, index) in list" :key="index">
-          <div class="__card">
-            <mengCard :info="item" :size="80"/>
+      <div class="container">
+        <div class="_title">
+          <h5>今日榜单</h5>
+          <span>查看更多</span>
+        </div>
+        <panel :list="list5" rank></panel>
+      </div>
+      <div class="banner">
+        <img :src="banner">
+      </div>
+      <div class="container">
+        <div class="_title">
+          <h5>科普大事件</h5>
+        </div>
+        <div class="_news">
+          <img :src="banner">
+          <div>
+            <h5>{{news.title}}</h5>
+            <p>{{news.abstract}}</p>
           </div>
-        </swiper-item>
-      </swiper>
-      <h5 class="tips">向右滑动选择你的萌卡</h5>
+        </div>
+      </div>
+      <div class="marginTop">
+        <meng-list />
+      </div>
+      <mengbar type='discovery'></mengbar>
     </div>
-    <ul class="list">
-      <li v-for="(item, index) in list" :key="index">
-        <div class="__card">
-          <mengCard :info="item" :size="46"/>
-        </div>
-        <div>
-          <span>酷黑金属</span>
-        </div>
-      </li>
-    </ul>
-
-    <mengbar type='discovery'></mengbar>
   </div>
 </template>
 
 <script>
-import mengCard from '@/components/mengCard'
+import search from '@/components/search'
+import panel from '@/components/panel'
+import mengList from '@/components/mengList'
 import mengbar from '@/components/mengbar'
 
-import info from '@/data/card'
+import panelData from '@/data/panel'
 
 export default {
-  components: { mengCard, mengbar },
+  components: { search, panel, mengList, mengbar },
   data () {
     return {
-      list: [info, info, info, info]
+      list4: [panelData, panelData, panelData, panelData],
+      list5: [panelData, panelData, panelData, panelData, panelData],
+      banner: 'http://img.self.com.cn/userfiles/201311/1385379601646_800X565.jpg',
+      news: {
+        title: '绝育',
+        abstract: '详情'
+      }
     }
   }
 }
@@ -55,56 +66,95 @@ export default {
 <style lang="less" scoped>
 @import url(../../global.less);
 
-.top {
-  background: @primary;
+.discovery {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  bottom: @btm-height;
+  overflow-y: scroll;
+  background: lighten(@gray, 8%);
 }
-.cards {
-  padding: 6px 0;
-  height: 43vw;
 
-  .__card {
-    width: 80vw;
-    margin: 0 auto;
+.background {
+  position: relative;
+
+  @back-height: 40px;
+  &::after {
+    @circle-size: 140vw;
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    // position: absolute;
+    width: @circle-size;
+    height: @circle-size;
+    margin-left: -(@circle-size - 100vw) / 2;
+    margin-top: -(@circle-size - @back-height);
+    // top: 50%;
+    // left: 50%;
+    // transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: @primary;
+    z-index: -1;
   }
 }
-.from {
+
+._title {
   display: flex;
-  width: 100vw;
-  justify-content: center;
-  font-size: @font;
-  line-height: @font + 2px;
-  color: #fff;
+  padding: 6px;
+
+  > h5 {
+    flex: 1;
+  }
 
   > span {
-    margin: 1px 5px;
+    width: 100px;
+    text-align: right;
+    font-size: @font;
+  }
+}
 
-    &.active {
-      color: @white;
+.container {
+  width: 92%;
+  margin: 0 auto;
+  margin-top: 10px;
+  background: @white;
+  border-radius: 10px;
+}
+
+.banner {
+  margin-top: 10px;
+
+  img {
+    width: 100%;
+    height: 100px;
+  }
+}
+
+._news {
+  display: flex;
+
+  > img {
+    width: 70px;
+    height: 70px;
+    margin: 10px;
+    border-radius: 10px;
+  }
+
+  > div {
+    flex: 1;
+    margin: 10px 0;
+
+    p {
+      font-size: @font;
     }
   }
 }
-.tips {
-  text-align: center;
-  font-size: @font;
-  padding-bottom: 10px;
-  color: @white;
-}
-.list {
-  display: flex;
-  flex-wrap: wrap;
-  margin-top: 20px;
-  width: 100vw;
 
-  > li {
-    flex: 1;
-    padding: 0 2vw;
-  }
-
-  .__card {
-    width: 46vw;
-    height: 24vw;
-    margin: 0 auto;
-  }
+.marginTop {
+  margin-top: 10px;
 }
 </style>
 

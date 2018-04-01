@@ -3,6 +3,7 @@ var fs = require('fs')
 var utils = require('./utils')
 var config = require('../config')
 var vueLoaderConfig = require('./vue-loader.conf')
+var MpvuePlugin = require('webpack-mpvue-asset-plugin')
 
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
@@ -135,5 +136,6 @@ module.exports = {
   },
   plugins: [
     // new WebpackPluginMpvueSingleVue()
+    new MpvuePlugin()
   ]
 }

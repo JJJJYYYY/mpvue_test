@@ -61,7 +61,7 @@ module.exports = merge(baseWebpackConfig, {
           /\.js$/.test(module.resource) &&
           module.resource.indexOf('node_modules') >= 0
         )
-      }
+      } || count >= 2
     }),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'manifest',

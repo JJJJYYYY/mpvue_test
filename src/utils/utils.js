@@ -12,3 +12,7 @@ export function mounteRef (node) {
     }
   })
 }
+
+export function createStyle (style) {
+  return style ? Object.keys(style).map(key => `${key.replace(/([A-Z])/g, '-$1').toLowerCase()}:${style[key]};`).join('') : ''
+}

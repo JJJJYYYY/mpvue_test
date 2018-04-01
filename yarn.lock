@@ -5799,6 +5799,10 @@ webpack-merge@^4.1.0:
   dependencies:
     lodash "^4.17.5"
 
+webpack-mpvue-asset-plugin@^0.0.1:
+  version "0.0.1"
+  resolved "http://registry.npm.taobao.org/webpack-mpvue-asset-plugin/download/webpack-mpvue-asset-plugin-0.0.1.tgz#ff2e5c46e794244f4a21a8bdfb4269cf8a5ded22"
+
 webpack-sources@^0.1.0:
   version "0.1.5"
   resolved "http://registry.npm.taobao.org/webpack-sources/download/webpack-sources-0.1.5.tgz#aa1f3abf0f0d74db7111c40e500b84f966640750"
