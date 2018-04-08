@@ -1,4 +1,4 @@
-export function mounteRef (node) {
+export function mountRef (node) {
   node.$children.forEach(child => {
     let tag = child.$options._componentTag
     if (node.$refs[tag]) {

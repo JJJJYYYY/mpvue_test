@@ -11,24 +11,23 @@
         @click="changeType('dog')"
         >狗</li>
     </ul>
-    <div class="from">
-      <span :class="{active: from === 'hot'}"
-        @click="changeFrom('hot')"
-        >推荐</span>
-      <span>|</span>
-      <span :class="{active: from === 'nearby'}"
-        @click="changeFrom('nearby')"
-        >附近</span>
-    </div>
+    <tab :tabs='tabs' @change='changeFrom' />
   </div>
 </template>
 
 <script>
+import tab from './base/tab'
+
 export default {
+  components: { tab },
   data () {
     return {
       type: 'all',
-      from: 'hot'
+      from: 'hot',
+      tabs: [
+        { name: '推荐', type: 'hot' },
+        { name: '附近', type: 'nearby' }
+      ]
     }
   },
   methods: {
@@ -72,21 +71,6 @@ export default {
       background: @white;
       border-radius: @font-sm;
       color: @primary;
-    }
-  }
-}
-.from {
-  display: flex;
-  width: 100vw;
-  justify-content: center;
-  font-size: @font;
-  line-height: @font + 2px;
-
-  > span {
-    margin: 1px 5px;
-
-    &.active {
-      color: @white;
     }
   }
 }

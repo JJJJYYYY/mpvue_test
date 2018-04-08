@@ -4,62 +4,26 @@ var utils = require('./utils')
 var config = require('../config')
 var vueLoaderConfig = require('./vue-loader.conf')
 var MpvuePlugin = require('webpack-mpvue-asset-plugin')
+var glob = require('glob')
 
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
 }
 
-function getEntry (dir, entry) {
-  const files = fs.readdirSync(dir)
-  return files.reduce((res, k) => {
-    const page = path.resolve(dir, k, entry)
-    if (fs.existsSync(page)) {
-      res[k] = page
-    }
+function getEntry (rootSrc, pattern) {
+  var files = glob.sync(path.resolve(rootSrc, pattern))
+  return files.reduce((res, file) => {
+    var info = path.parse(file)
+    var key = info.dir.slice(rootSrc.length + 1) + '/' + info.name
+    res[key] = path.resolve(file)
     return res
   }, {})
 }
 
 const appEntry = { app: resolve('./src/app.js') }
-const pagesEntry = getEntry(resolve('./src/pages'), 'main.js')
+const pagesEntry = getEntry(resolve('./src'), 'pages/**/main.js')
 
 const entry = Object.assign({}, appEntry, pagesEntry)
-
-function WebpackPluginMpvueSingleVue() {
-
-}
-
-// 在插件函数的 prototype 上定义一个 `apply` 方法。
-WebpackPluginMpvueSingleVue.prototype.apply = function(compiler) {
-  // 指定一个挂载到 webpack 自身的事件钩子。
-  let entry
-  compiler.plugin('after-plugins', function(compilation, callback) {
-    entry = compilation.options.entry
-    Object.keys(entry).forEach(page => {
-      if (page !== 'app')
-        fs.writeFileSync(entry[page],
- `import Vue from 'vue'
-import App from './${page}.vue'
-
-App.config = App.config || {}
-new Vue(App).$mount()
-
-export default {
-  config: App.config
-}
-`)
-    })
-  })
-
-  compiler.plugin('emit', function (compilation, callback) {
-    Object.keys(entry).forEach(page => {
-      if (page !== 'app')
-        fs.unlinkSync(`${entry[page]}`)
-    })
-
-    callback()
-  })
-}
 
 module.exports = {
   entry: entry,

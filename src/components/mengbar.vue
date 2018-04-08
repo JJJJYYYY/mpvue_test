@@ -42,7 +42,7 @@ export default {
     go (e) {
       this.$emit('change-tab')
       let type = e.currentTarget.dataset.type
-      wx.redirectTo({ url: `/pages/${type}/${type}` })
+      wx.redirectTo({ url: `/pages/${type}/main` })
     }
   }
 }

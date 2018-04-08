@@ -5,14 +5,14 @@
       <div class="container">
         <div class="_title">
           <h5>名门望族</h5>
-          <span>查看更多</span>
+          <a href="./family/main">查看更多</a>
         </div>
         <panel :list="list4"></panel>
       </div>
       <div class="container">
         <div class="_title">
           <h5>今日榜单</h5>
-          <span>查看更多</span>
+          <a href="./rank/main">查看更多</a>
         </div>
         <panel :list="list5" rank></panel>
       </div>
@@ -99,29 +99,6 @@ export default {
     background: @primary;
     z-index: -1;
   }
-}
-
-._title {
-  display: flex;
-  padding: 6px;
-
-  > h5 {
-    flex: 1;
-  }
-
-  > span {
-    width: 100px;
-    text-align: right;
-    font-size: @font;
-  }
-}
-
-.container {
-  width: 92%;
-  margin: 0 auto;
-  margin-top: 10px;
-  background: @white;
-  border-radius: 10px;
 }
 
 .banner {

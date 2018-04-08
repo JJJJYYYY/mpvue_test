@@ -3,7 +3,8 @@
     <indexNav @change-from='changeFrom'/>
     <swiper v-if="from === 'hot'" class="main" vertical @change="swiperChange">
       <swiper-item v-for="(item, index) in list" :key="index">
-        <meng ref="meng" :content="item" @show-comment="showComment"></meng>
+        <meng-video v-if="item.src" ref="meng" :src='item.src' />
+        <meng v-else ref="meng" :content="item" @show-comment="showComment" />
       </swiper-item>
     </swiper>
     <mengList v-else/>
@@ -17,23 +18,23 @@
 <script>
 import indexNav from '@/components/indexNav'
 import meng from '@/components/meng'
+import mengVideo from '@/components/mengVideo'
 import mengList from '@/components/mengList'
 import mengbar from '@/components/mengbar'
 import comment from '@/components/comment'
 
-import { mounteRef } from '@/utils/utils'
-
 import content from '@/data/content'
+import video from '@/data/video'
 import commentData from '@/data/comment'
 
 export default {
-  components: { indexNav, meng, mengList, mengbar, comment },
+  components: { indexNav, meng, mengVideo, mengList, mengbar, comment },
   data () {
     return {
       mounted: false,
       current: 0,
       from: 'hot',
-      list: [content, content, content],
+      list: [content, content, video, content],
       comment: [commentData, commentData, commentData],
       commentNum: 123
     }
@@ -61,7 +62,13 @@ export default {
 
   mounted () {
     if (!this.mounted) {
-      mounteRef(this)
+      this.$refs.meng = []
+      this.$children.forEach(child => {
+        if (child.$options._componentTag === 'meng' ||
+           child.$options._componentTag === 'meng-video') {
+          this.$refs.meng.push(child)
+        }
+      })
       this.mounted = true
     }
 

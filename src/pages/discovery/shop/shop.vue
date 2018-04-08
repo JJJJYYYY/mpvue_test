@@ -1,15 +1,7 @@
 <template>
   <div>
     <div class="top">
-      <div class="from">
-        <span :class="{active: from === 'hot'}"
-          @click="changeFrom('hot')"
-          >皮肤中心</span>
-        <span>|</span>
-        <span :class="{active: from === 'nearby'}"
-          @click="changeFrom('nearby')"
-          >兑换奖品</span>
-      </div>
+      <tab :tabs='tabs' />
       <swiper class="cards"
         previous-margin="42rpx" next-margin="50rpx">
         <swiper-item class="_item"
@@ -31,21 +23,23 @@
         </div>
       </li>
     </ul>
-
-    <mengbar type='discovery'></mengbar>
   </div>
 </template>
 
 <script>
+import tab from '@/components/base/tab'
 import mengCard from '@/components/mengCard'
-import mengbar from '@/components/mengbar'
 
 import info from '@/data/card'
 
 export default {
-  components: { mengCard, mengbar },
+  components: { mengCard, tab },
   data () {
     return {
+      tabs: [
+        { name: '皮肤中心', type: 'skin' },
+        { name: '兑换奖品', type: 'exchange' }
+      ],
       list: [info, info, info, info]
     }
   }
@@ -53,7 +47,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@import url(../../global.less);
+@import url(../../../global.less);
 
 .top {
   background: @primary;
@@ -65,22 +59,6 @@ export default {
   .__card {
     width: 80vw;
     margin: 0 auto;
-  }
-}
-.from {
-  display: flex;
-  width: 100vw;
-  justify-content: center;
-  font-size: @font;
-  line-height: @font + 2px;
-  color: #fff;
-
-  > span {
-    margin: 1px 5px;
-
-    &.active {
-      color: @white;
-    }
   }
 }
 .tips {
