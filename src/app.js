@@ -11,7 +11,7 @@ app.$mount()
 
 export default {
   config: {
-    pages: [ '^pages/create/main' ],
+    pages: [ '^pages/mine/main' ],
     window: {
       backgroundTextStyle: 'light',
       navigationBarBackgroundColor: '#000000',

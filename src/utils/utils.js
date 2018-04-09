@@ -1,16 +1,20 @@
-export function mountRef (node) {
+export function getRefByTags (node, tags) {
+  let refs = {}
   node.$children.forEach(child => {
     let tag = child.$options._componentTag
-    if (node.$refs[tag]) {
-      if (Array.isArray(node.$refs[tag])) {
-        node.$refs[tag].push(child)
-      } else {
-        node.$refs[tag] = [].concat(node.$refs[tag], child)
+
+    if (tags && !tags.includes(tag)) return
+
+    if (refs[tag]) {
+      if (Array.isArray(refs[tag])) {
+        refs[tag].push(child)
       }
     } else {
-      node.$refs[tag] = child
+      refs[tag] = [child]
     }
   })
+
+  return refs
 }
 
 export function createStyle (style) {

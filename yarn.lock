@@ -3202,6 +3202,10 @@ isstream@~0.1.2:
   version "0.1.2"
   resolved "http://registry.npm.taobao.org/isstream/download/isstream-0.1.2.tgz#47e63f7af55afa6f92e1500e690eb8b8529c099a"
 
+jjj-promise@^1.0.1:
+  version "1.0.1"
+  resolved "http://registry.npm.taobao.org/jjj-promise/download/jjj-promise-1.0.1.tgz#6f58193af34295922cffe1f5393df6d2f67b2cbb"
+
 js-base64@^2.1.9:
   version "2.4.3"
   resolved "http://registry.npm.taobao.org/js-base64/download/js-base64-2.4.3.tgz#2e545ec2b0f2957f41356510205214e98fad6582"

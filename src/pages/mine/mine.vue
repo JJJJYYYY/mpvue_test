@@ -5,6 +5,7 @@
       <h3>坏猫先生</h3>
       <small>已有{{2}}张萌卡</small>
     </div>
+    <inform />
     <ul class="menu">
       <li>
         <i class="badge">999+</i>
@@ -43,31 +44,17 @@
         <img src="http://pic1.win4000.com/mobile/5/59705d3a76aec.png">
         <i class="number">{{8}}</i>
       </li>
-      <li>
-        <i class="like">{{524}}</i>
-        <img src="http://pic1.win4000.com/mobile/5/59705d3a76aec.png">
-        <i class="number">{{8}}</i>
-      </li>
-      <li>
-        <i class="like">{{524}}</i>
-        <img src="http://pic1.win4000.com/mobile/5/59705d3a76aec.png">
-        <i class="number">{{8}}</i>
-      </li>
-      <li>
-        <i class="like">{{524}}</i>
-        <img src="http://pic1.win4000.com/mobile/5/59705d3a76aec.png">
-        <i class="number">{{8}}</i>
-      </li>
     </ul>
     <mengbar type='mine'></mengbar>
   </div>
 </template>
 
 <script>
+import inform from '@/components/inform'
 import mengbar from '@/components/mengbar'
 
 export default {
-  components: { mengbar },
+  components: { inform, mengbar },
   config: {}
 }
 </script>
@@ -80,11 +67,13 @@ export default {
   top: 0;
   bottom: @btm-height;
   left: 0;
+  right: 0;
   overflow-x: hidden;
   overflow-y: scroll;
 }
 .circle_background {
   @head-size: 70px;
+  height: 160px;
 
   img {
     width: @head-size;
