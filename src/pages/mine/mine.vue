@@ -5,24 +5,23 @@
       <h3>坏猫先生</h3>
       <small>已有{{2}}张萌卡</small>
     </div>
-    <inform />
     <ul class="menu">
-      <li>
+      <li @click="goTo('./confirm/main')">
         <i class="badge">999+</i>
         <icon type="waiting" size="30" />
         <span>待确认</span>
       </li>
-      <li>
+      <li @click="goTo('./fans/main')">
         <i class="badge">999</i>
         <icon type="waiting" size="30" />
         <span>{{125}}粉丝</span>
       </li>
-      <li>
+      <li @click="goTo('./likes/main')">
         <i class="badge">999</i>
         <icon type="waiting" size="30" />
         <span>{{'1.5W'}}获赞</span>
       </li>
-      <li>
+      <li @click="goTo('./comment/main')">
         <i class="badge">999</i>
         <icon type="waiting" size="30" />
         <span>评论</span>
@@ -50,12 +49,18 @@
 </template>
 
 <script>
-import inform from '@/components/inform'
 import mengbar from '@/components/mengbar'
 
+import hat from '@/utils/wx'
+
 export default {
-  components: { inform, mengbar },
-  config: {}
+  components: { mengbar },
+  config: {},
+  methods: {
+    goTo (href) {
+      hat.navigateTo({ url: href })
+    }
+  }
 }
 </script>
 

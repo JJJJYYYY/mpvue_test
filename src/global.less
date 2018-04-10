@@ -6,8 +6,17 @@
 @silver: silver;
 @coppery: yellow;
 
+@bg-color-gray: #ddd;
+
 .trans-black (@trans: 0.5) {
   background-color: rgba(0, 0, 0, @trans);
+}
+
+.omit (@width: auto) {
+  width: @width;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 @font-mini: 12px;

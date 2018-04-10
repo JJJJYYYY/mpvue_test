@@ -1,24 +1,54 @@
 <template>
   <div class="inform">
     <div class="_form">
-      <img :src="''" />
+      <img :src="formHead" />
     </div>
     <div class="_content">
-      <div class>
-        <span>{{ 'name' }}</span>
-        <span>{{ 'operation' }}</span>
+      <div class='__operation'>
+        <span>@{{ formName }}</span>
+        <span>{{ operation }}<span>@{{ toName }}</span>{{ to }}</span>
       </div>
-      <p>{{ 'content' }}</p>
-      <span>{{ 'date' }}</span>
+      <p class="__comment">{{ content }}</p>
+      <span class="__date">{{ date }}</span>
     </div>
     <div class="_to">
-      <img :src="''" />
+      <img :src="toHead" />
     </div>
   </div>
 </template>
 
 <script>
 export default {
+  props: {
+    formHead: {
+      type: String,
+      require: true
+    },
+    formName: {
+      type: String,
+      require: true
+    },
+    toHead: {
+      type: String,
+      require: true
+    },
+    toName: {
+      type: String,
+      require: true
+    },
+    date: {
+      type: String
+    },
+    operation: {
+      type: String
+    },
+    to: {
+      type: String
+    },
+    content: {
+      type: String
+    }
+  },
   data () {
     return {}
   }
@@ -26,9 +56,13 @@ export default {
 </script>
 
 <style lang="less" scoped>
+@import url(../global.less);
+
 .inform {
   display: flex;
   padding: 20px 0;
+  background-color: @white;
+  margin-bottom: 20px;
 }
 ._form {
   width: 70px;
@@ -54,5 +88,36 @@ export default {
     border-radius: 10px;
     background: red;
   }
+}
+.__operation {
+  font-size: @font;
+  display: flex;
+
+  > span {
+    &:first-child {
+      .omit(60px);
+    }
+
+    &:last-child {
+      flex: 1;
+      text-align: right;
+
+      > span {
+        .omit(60px);
+      }
+    }
+  }
+}
+.__comment {
+  font-size: @font;
+  min-height: @font * 2;
+  max-height: @font * 3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  // .omit(300px);
+  // white-space: pre-wrap;
+}
+.__date {
+  font-size: @font-sm;
 }
 </style>
