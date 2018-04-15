@@ -1,6 +1,6 @@
 <template>
   <ul class="member">
-    <li v-for="(item, index) in data.member" :key="index">
+    <li v-for="(item, index) in _getMember" :key="index">
       <img :src="item" :style="_imgStyle" />
       <div class="_other" :style="_imgStyle"
         v-if="index === data.member.length - 1">
@@ -29,6 +29,11 @@ export default {
     return {}
   },
   computed: {
+    _getMember () {
+      return this.data.member.length < this.max
+        ? this.data.member
+        : this.data.member.slice(0, 5)
+    },
     _imgStyle () {
       let size = ~~(this.size / this.max)
 

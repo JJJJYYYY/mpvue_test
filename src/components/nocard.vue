@@ -2,7 +2,7 @@
   <div class="nocard" :style='_height'>
     <h2>为主子创建一张专属萌卡</h2>
     <p>做个有身份的宠儿</p>
-    <a href="../create/main" class="button">立即创建</a>
+    <a href="../create/main" class="button btn-border">立即创建</a>
   </div>
 </template>
 

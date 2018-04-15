@@ -4,12 +4,12 @@
       {{ current + 1 }} / {{content.content.length}}
     </span>
     <swiper class="swiper" :autoplay="playing"
-      :current="current" :interval="3000" @change="swiperChange">
+      :current="current" :interval="interval" @change="swiperChange">
       <swiper-item v-for="(item, index) in content.content" :key="index">
         <img class="_image" :src='item.img' mode='widthFix'/>
       </swiper-item>
     </swiper>
-    <div class="menu absolute">
+    <div class="menu absolute" v-if="!hideIcon">
       <div @click="stop"><icon type="success" size="30" /></div>
       <div><icon type="waiting" size="30" /></div>
       <div><icon type="download" size="30"
@@ -19,17 +19,20 @@
     </div>
     <div class="info absolute">
       <div class="_title">@{{'提莫'}}</div>
-      <div>这是五个字这是五个字这是五个字这是五个字这是五个字这是五个字这是五个字这是五个字</div>
+      <p class="_intro">{{content.intro}}</p>
     </div>
-    <progress class="absolute" :percent='50'
-      color="pink" stroke-width="2"/>
   </div>
 </template>
 
 <script>
 export default {
   props: {
-    content: Object
+    content: Object,
+    hideIcon: Boolean,
+    interval: {
+      type: Number,
+      default: 2000
+    }
   },
   data () {
     return {
@@ -40,11 +43,11 @@ export default {
   created () {
     let data = this.content
 
-    let audio = (this._audio = wx.createInnerAudioContext())
-    audio.onPlay(this._play.bind(this))
-    audio.onPause(this._pause.bind(this))
-    audio.onEnded(this._ended.bind(this))
-    audio.onTimeUpdate(this._timeUpdate.bind(this))
+    let audio = this._audio = wx.createInnerAudioContext()
+    audio.onPlay(this._play)
+    audio.onPause(this._pause)
+    audio.onEnded(this._ended)
+    audio.onTimeUpdate(this._timeUpdate)
 
     this._sound = data.sound
       ? data.sound
@@ -64,7 +67,7 @@ export default {
      * 开始播放，供外部调用
      */
     start () {
-      // this._audio.play()
+      this._audio.play()
       this.current = 0
       this.playing = true
     },
@@ -132,6 +135,11 @@ export default {
 
   ._title {
     font-size: @font-lg;
+  }
+
+  ._intro {
+    max-width: 40vw;
+    white-space: wrap;
   }
 }
 

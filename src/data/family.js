@@ -4,6 +4,7 @@ export default {
     'http://photocdn.sohu.com/20141225/Img407278781.jpg',
     'http://photocdn.sohu.com/20141225/Img407278781.jpg',
     'http://photocdn.sohu.com/20141225/Img407278781.jpg',
+    'http://photocdn.sohu.com/20141225/Img407278781.jpg',
     'http://photocdn.sohu.com/20141225/Img407278781.jpg'
   ],
   number: 20,

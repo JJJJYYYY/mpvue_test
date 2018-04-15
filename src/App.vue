@@ -8,7 +8,8 @@ export default {
 @import url(./global.less);
 
 .button {
-  background: @primary;
+  background: @white;
+  color: @primary;
   height: 40px;
   line-height: 40px;
   border-radius: 20px;
@@ -16,7 +17,20 @@ export default {
   text-align: center;
   padding: 0 16px;
   font-size: @font-lg;
-  color: @white;
+
+  &.btn-primary {
+    background: @primary;
+    color: @white;
+  }
+
+  &.btn-border {
+    border: 1px solid @primary;
+  }
+
+  &.disable {
+    color: @gray;
+    border-color: @gray;
+  }
 }
 
 .badge {

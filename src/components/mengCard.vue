@@ -27,7 +27,7 @@
       <div>
         <i></i>{{__familyName}}
       </div>
-      <div>
+      <div v-if="family">
         <member :data='family' :size='30' :max='4' />
       </div>
     </div>
@@ -163,7 +163,7 @@ export default {
     },
     info: {
       type: Object,
-      default: {}
+      default: () => { return {} }
     },
     family: Object,
     style: {
@@ -222,6 +222,7 @@ export default {
 @import url(../global.less);
 
 .card {
+  width: 100vw;
   border: 4px solid #ccc;
   border-radius: 4vw;
   font-size: @font;

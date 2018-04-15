@@ -11,12 +11,10 @@
     </div>
     <div v-if="type === tabs[0].type" class="_card">
       <div>
-        <meng-card :info='info'
-          :family='family' />
+        <meng-card :info='info' :family='family' :size='90' />
       </div>
       <div>
-        <meng-card :info='info'
-          :family='{}' />
+        <meng-card :info='info' :family='family' :size='90' />
       </div>
       <div>
         <nocard :height='160'/>
@@ -27,8 +25,7 @@
     </div>
     <div v-else class="_card">
       <div>
-        <meng-card :info='info'
-          :family='family' />
+        <meng-card :info='info' :family='family' />
       </div>
       <div class="_family">
         <familyCard />

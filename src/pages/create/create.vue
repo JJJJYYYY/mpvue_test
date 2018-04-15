@@ -55,7 +55,7 @@
         </span>
       </div>
       <div class="_save">
-        <a class="button" @click="create">{{'保存'}}</a>
+        <a class="button btn-border" @click="create">{{'保存'}}</a>
         <p class="__tips">请认真填写主子信息，虚假身份，广告，侮辱性的萌卡将被删除</p>
       </div>
     </div>

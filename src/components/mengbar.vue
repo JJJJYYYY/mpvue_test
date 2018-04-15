@@ -8,7 +8,7 @@
       <span :class="{ active: 'discovery' === type }"
         >发现</span>
     </li>
-    <li @click="go" data-type='create'>
+    <li @click="toNew" data-type='new'>
       <span class="add">+</span>
     </li>
     <li @click="go" data-type='single'>
@@ -43,6 +43,10 @@ export default {
       this.$emit('change-tab')
       let type = e.currentTarget.dataset.type
       wx.redirectTo({ url: `/pages/${type}/main` })
+    },
+    toNew () {
+      this.$emit('change-tab')
+      wx.navigateTo({ url: `/pages/new/main` })
     }
   }
 }
