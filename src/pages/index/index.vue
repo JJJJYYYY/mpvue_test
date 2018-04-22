@@ -1,22 +1,34 @@
 <template>
-  <div>
-    <indexNav @change-from='changeFrom'/>
-    <swiper v-if="from === 'hot'" class="main" vertical @change="swiperChange">
-      <swiper-item v-for="(item, index) in list" :key="index">
-        <meng-video v-if="item.src" ref="meng" :src='item.src' />
-        <meng v-else ref="meng" :content="item" @show-comment="showComment" />
-      </swiper-item>
-    </swiper>
-    <mengList v-else/>
+  <div class="index">
+    <tab :tabs='tabs' @change='changeFrom' />
+    <div class="_hot" v-if="from === 'hot'">
+      <indexNav @change-from='changeFrom'/>
+      <swiper class="main" vertical @change="swiperChange">
+        <swiper-item v-for="(item, index) in list" :key="index">
+          <meng-video v-if="item.src" ref="meng" :src='item.src' />
+          <meng v-else ref="meng" :content="item" @show-comment="showComment" />
+        </swiper-item>
+      </swiper>
+      <div class="_progress">
+        <div>
+          <div>
+            <img src="/static/img/icon_jar.png" />
+          </div>
+          <p>x{{22}}</p>
+        </div>
+        <progress :percent="60" :stroke-width='2.5' :color="'pink'" />
+      </div>
+    </div>
+    <div class="_nearby" v-else>
+      <mengList :data='mengListData' />
+    </div>
     <mengbar type='index'
-      background='transparent'
       @change-tab='changeTab'/>
     <div class="comment" v-if="commentVisibel">
       <img class="bg_img" :src="bgImg" />
       <header>
-        <i></i>
-        <span>{{commentNum}}条评论</span>
-        <icon type="clear" size="14" @click="closeComment"/>
+        <h3>{{commentNum}}条评论</h3>
+        <p @click="closeComment">&times;</p>
       </header>
       <div class="_content">
         <comment :data='comment' />
@@ -30,6 +42,7 @@
 
 <script>
 import indexNav from '@/components/indexNav'
+import tab from '@/components/base/tab'
 import meng from '@/components/meng'
 import mengVideo from '@/components/mengVideo'
 import mengList from '@/components/mengList'
@@ -37,20 +50,26 @@ import mengbar from '@/components/mengbar'
 import comment from '@/components/comment'
 
 import content from '@/data/content'
+import mengListData from '@/data/mengList'
 // import video from '@/data/video'
 import commentData from '@/data/comment'
 
 export default {
-  components: { indexNav, meng, mengVideo, mengList, mengbar, comment },
+  components: { indexNav, tab, meng, mengVideo, mengList, mengbar, comment },
   data () {
     return {
       mounted: false,
       current: 0,
       from: 'hot',
+      tabs: [
+        { name: '推荐', type: 'hot' },
+        { name: '附近', type: 'nearby' }
+      ],
       list: [content, content, content],
+      mengListData: mengListData,
       comment: [commentData, commentData, commentData],
       commentNum: 123,
-      commentVisibel: true
+      commentVisibel: false
     }
   },
 
@@ -100,14 +119,14 @@ export default {
 <style lang="less" scoped>
 @import url(../../global.less);
 
-.main, swiper-item {
+.index, .main, swiper-item {
   width: 100vw;
   height: 100vh;
   background: #000000;
 }
 
 @header-height: 36px;
-@footer-height: 50px;
+@footer-height: 49px;
 @height: 400px;
 .comment {
   position: fixed;
@@ -131,6 +150,8 @@ export default {
 
   ._content {
     height: @height - @header-height - @footer-height;
+    margin-left: 12px;
+    padding-right: 25px;
     overflow-y: scroll;
   }
 }
@@ -145,32 +166,88 @@ export default {
 }
 
 header {
-  display: flex;
-  height: @header-height;
   text-align: center;
-  line-height: @header-height;
-  color: @gray;
+  color: #aaaaaa;
+  margin: 15px 0;
+  position: relative;
 
-  icon, i {
-    width: 20px;
+  h3 {
+    font-size: @font-sm;
+    line-height: @font-sm;
   }
 
-  span {
-    flex: 1;
-    font-size: @font-sm;
+  p {
+    @size: 19px;
+    line-height: @font-sm;
+    display: inline;
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translate(0, -50%);
+    vertical-align: top;
+    padding: 6px 0 10px 0;
   }
 }
 
 footer {
   position: absolute;
   bottom: 0;
-  width: 96%;
-  padding: 0 2%;
+  width: 100%;
+  background: #1d1d1d;
 
   input {
+    font-size: 15px;
+    padding: 0 12px;
     height: @footer-height;
     line-height: @footer-height;
   }
+}
+._progress {
+  position: fixed;
+  width: 100%;
+  bottom: @btm-height;
+  background: @white;
+  width: 75px;
+  border-radius: 10px 10px 0 0;
+  text-align: center;
+
+  >div {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    padding: 6px 10px 0 10px;
+    font-size: @font-sm;
+
+    >p {
+      flex: 1;
+    }
+
+    >div {
+      text-align: center;
+    }
+  }
+
+  img {
+    width: 20px;
+    height: 20px;
+    margin-right: 6px;
+  }
+
+  progress {
+    width: 100vw;
+  }
+}
+._hot, ._nearby  {
+  width: 100%;
+  position: absolute;
+  bottom: @btm-height;
+}
+._hot {
+  top: 0;
+}
+._nearby{
+  top: 30px;
+  overflow-y: scroll;
 }
 </style>
 

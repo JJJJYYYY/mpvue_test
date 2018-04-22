@@ -11,33 +11,21 @@
         @click="changeType('dog')"
         >狗</li>
     </ul>
-    <tab :tabs='tabs' @change='changeFrom' />
   </div>
 </template>
 
 <script>
-import tab from './base/tab'
-
 export default {
-  components: { tab },
   data () {
     return {
       type: 'all',
-      from: 'hot',
-      tabs: [
-        { name: '推荐', type: 'hot' },
-        { name: '附近', type: 'nearby' }
-      ]
+      from: 'hot'
     }
   },
   methods: {
     changeType (type) {
       this.type = type
       this.$emit('change-type')
-    },
-    changeFrom (from) {
-      this.from = from
-      this.$emit('change-from', from)
     }
   }
 }
@@ -52,6 +40,7 @@ export default {
   left: 0;
   color: darken(@gray, 20%);
   font-size: @font-sm;
+  line-height: @font-sm + 5px;
   text-align: center;
   z-index: 1;
 }

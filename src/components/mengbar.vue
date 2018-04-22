@@ -62,7 +62,7 @@ export default {
   line-height: @btm-height;
   color: @white;
   text-align: center;
-  font-size: @font-sm;
+  font-size: @font;
   z-index: 100;
 
   > li {

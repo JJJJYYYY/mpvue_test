@@ -1,5 +1,7 @@
 export default {
+  'head': 'http://hlj.people.com.cn/NMediaFile/2014/1110/LOCAL201411101004080870014700797.jpg',
   'sound': 'http://116.77.76.227:83/2Q2W5571969C131DE678798F2881E7D5ED59B6749621_unknown_3FBBB74802FFF927AFCFD1F7553BD9AAEEDE74EF_1/hao.1015600.com/upload/ring/000/994/425d6c131accd038aeaa713bcdf35142.mp3',
+  'intro': '点赞点赞点赞点赞点赞点赞点赞点赞点赞点赞点赞点赞点赞点赞点赞点赞点赞点赞点赞',
   'content': [
     {
       'img': 'http://hlj.people.com.cn/NMediaFile/2014/1110/LOCAL201411101004080870014700797.jpg',

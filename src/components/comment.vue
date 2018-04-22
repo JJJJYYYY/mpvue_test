@@ -14,7 +14,8 @@
         <div class="__info" :style='_borderColor'>
           <div>{{item.date}}</div>
           <span>
-            <icon type="clear" size="18" />{{item.likeNum}}
+            <img class="icon_like" src="/static/img/icon_like.png" />
+            <span class="like_number">{{item.likeNum}}</span>
           </span>
         </div>
       </div>
@@ -26,8 +27,7 @@
 export default {
   props: {
     data: {
-      type: Array,
-      default: []
+      type: Array
     },
     color: {
       type: String,
@@ -36,7 +36,6 @@ export default {
   },
   data () {
     return {
-      visible: true
     }
   },
   computed: {
@@ -57,31 +56,38 @@ export default {
 }
 
 ._head {
-  width: 60px;
   text-align: right;
 
   img {
-    width: 40px;
-    height: 40px;
+    width: 25px;
+    height: 25px;
     margin-right: 10px;
     border-radius: 50%;
   }
 }
-
+@gray: #444444;
 ._content {
   flex: 1;
   font-size: @font-sm;
 }
 .__content {
   font-size: @font;
+  line-height: @font + 3px;
 }
 .__to {
-  border-left: 3px solid @primary;
-  padding: 5px 0 5px 10px;
+  @size: 10px;
+  border-left: 1.5px solid @primary;
+  padding: @size 0 @size @size;
+  margin: @size 0;
   line-height: @font-sm + 10px;
+  .trans-black(0.2);
 }
+@size: 15px;
 .__info {
+  padding-bottom: @size;
+  margin-bottom: @size;
   border-bottom: 0.5px solid @gray;
+  font-size: @font-mini;
   display: flex;
   line-height: @font-sm * 2;
 
@@ -91,5 +97,17 @@ export default {
   > div:last-child {
     width: 60px;
   }
+}
+.__head {
+  font-size: 13px;
+}
+.icon_like {
+  width: @size;
+  height: @size;
+  vertical-align: middle;
+  padding: 4px;
+}
+.like_number {
+  vertical-align: middle;
 }
 </style>

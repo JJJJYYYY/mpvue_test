@@ -40,19 +40,26 @@ export default {
 }
 </script>
 
-
 <style lang="less" scoped>
 @import url(../../global.less);
 
 .tab {
+  position: fixed;
+  top: 0;
   display: flex;
-  width: 100vw;
+  width: 100%;
   justify-content: center;
-  font-size: @font;
-  line-height: @font + 2px;
+  font-size: @font-sm;
+  line-height: @font-sm + 2px;
+  color: @gray;
+  z-index: 10;
 
   > span {
     margin: 1px 5px;
+
+    &:nth-child(2) {
+      font-size: 10px;
+    }
 
     &.active {
       color: @white;
