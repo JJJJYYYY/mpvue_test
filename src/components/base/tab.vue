@@ -51,6 +51,7 @@ export default {
   justify-content: center;
   font-size: @font-sm;
   line-height: @font-sm + 2px;
+  padding: 14px 0;
   color: @gray;
   z-index: 10;
 

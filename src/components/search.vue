@@ -1,6 +1,6 @@
 <template>
   <div class="search">
-    <icon type="search" size="10" />
+    <icon type="search" size="16" />
     <input type="text" placeholder="搜索" />
   </div>
 </template>
@@ -15,23 +15,22 @@ export default {
 @import url('../global.less');
 
 .search {
-  width: 90%;
-  margin: 0 auto;
+  width: 100%;
   background: @white;
   display: flex;
-  padding: 4px;
+  padding: 2px 0;
   align-items: center;
-  border-radius: 30px;
-  margin-top: 10px;
+  border-radius: 35px;
+  color: #aaaaaa;
+  font-size: @font;
 
   > icon {
     width: 12px;
-    padding: 0 6px;
+    padding: 0 10px 0 15px;
   }
 
   > input {
     flex: 1;
-    font-size: @font;
   }
 }
 </style>

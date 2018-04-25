@@ -1,6 +1,7 @@
 import Promise from 'jjj-promise'
 
 const API = [
+  'getSystemInfo',
   'navigateTo',
   'chooseImage',
   'request'

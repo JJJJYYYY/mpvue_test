@@ -53,7 +53,7 @@ export default {
   background: @primary;
 }
 .cards {
-  padding: 6px 0;
+  padding-top: 50px;
   height: 43vw;
 
   .__card {

@@ -4,9 +4,9 @@
       <div class="container">
         <div class="_title">
           <h5>{{item.name}}</h5>
-          <span>查看详情</span>
+          <span>查看全部 ({{8}}) </span>
         </div>
-        <member :data='item' />
+        <member :data='item.member' />
       </div>
     </li>
   </ul>
@@ -37,10 +37,21 @@ export default {
   left: 0;
   right: 0;
   overflow-y: scroll;
-  background: @primary;
+  background: rgb(241, 241, 241);
 
   > li {
-    padding: 6px 0;
+    margin-top: 10px;
+    background: @white;
+  }
+}
+.container {
+  width: 100%;
+  margin: 0;
+
+  >._title {
+    padding-left: 0;
+    padding-right: 0;
+    margin: 0 12px;
   }
 }
 </style>

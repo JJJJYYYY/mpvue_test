@@ -74,7 +74,7 @@ export default {
 
 // panel 头部
 .container {
-  width: 92%;
+  width: 96%;
   margin: 0 auto;
   margin-top: 10px;
   background: @white;
@@ -82,16 +82,25 @@ export default {
 
   ._title {
     display: flex;
-    padding: 6px;
+    padding: 15px 6.5px 12px 6.5px;
+
+    img[data-icon] {
+      width: 18.5px;
+      height: 12px;
+      padding-right: 2px;
+    }
 
     > h5 {
       flex: 1;
+      font-size: @font;
+      color: #444444;
     }
 
     > a, > span {
       width: 100px;
       text-align: right;
-      font-size: @font;
+      font-size: @font-sm;
+      color: #999999;
     }
   }
 }
@@ -127,6 +136,35 @@ export default {
     color: @white;
     background: @primary;
     border-color: @primary;
+  }
+}
+
+@padding: 6px;
+.__voice {
+  padding-left: @padding;
+  padding-right: @padding * 1.5;
+  margin: 0 4px;
+  background: @primary;
+  border-radius: 6px;
+  color: @white;
+  font-size: @font-sm;
+  position: relative;
+
+  @border: 4px;
+  &::before {
+    content: '';
+    position: absolute;
+    display: inline-block;
+    border: @border solid transparent;
+    border-right-color: @primary;
+    left: -(@border * 1.5);
+    top: 50%;
+    margin-top: -@border;
+  }
+
+  >img {
+    width: 8px;
+    height: 10px;
   }
 }
 </style>

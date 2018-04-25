@@ -15,19 +15,19 @@
           <img class="__head" :src="content.head" />
           <img
             data-icon class="icon_attention"
-            src="/static/img/icon_attention.png"
+            src="/assets/icon/attention.png"
             model='widthFix'
           />
         </div>
         <div>
           <img v-if="content.like" data-icon
             class="icon_like like_click"
-            src="/static/img/icon_like.png"
+            src="/assets/icon/like.png"
             model='widthFix'
           />
           <img v-else data-icon
             class="icon_like like_click"
-            src="/static/img/icon_like.png"
+            src="/assets/icon/like.png"
             model='widthFix'
           />
           <p class="__number">{{10.4}}w</p>
@@ -35,7 +35,7 @@
         <div>
           <img
             data-icon class="icon_comment"
-            src="/static/img/icon_comment.png"
+            src="/assets/icon/comment.png"
             model='widthFix'
           />
           <p class="__number">{{10.4}}w</p>
@@ -43,7 +43,7 @@
         <div>
           <img
             data-icon class="icon_share"
-            src="/static/img/icon_share.png"
+            src="/assets/icon/share.png"
             model='widthFix'
           />
           <p class="__number">{{10.4}}w</p>
@@ -51,7 +51,7 @@
         <div>
           <img
             data-icon class="icon_jar"
-            src="/static/img/icon_jar.png"
+            src="/assets/icon/jar.png"
             model='widthFix'
           />
         </div>
@@ -240,7 +240,7 @@ export default {
 }
 img[data-icon] {
   width: 36.5px;
-  height: 36.5px;
+  height: 32px;
 }
 .icon_attention {
   width: 23px!important;

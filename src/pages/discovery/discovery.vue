@@ -1,38 +1,30 @@
 <template>
   <div class="discovery">
     <div class="background">
-      <search></search>
+      <div class="container">
+        <search></search>
+      </div>
       <div class="container">
         <div class="_title">
-          <h5>名门望族</h5>
+          <h5><img data-icon src="/assets/icon/family.png" />名门望族</h5>
           <a href="./family/main">查看更多</a>
         </div>
         <panel :list="list4"></panel>
       </div>
-      <div class="container">
-        <div class="_title">
-          <h5>今日榜单</h5>
-          <a href="./rank/main">查看更多</a>
+      <div class="__today_list">
+        <div class="container">
+          <div class="_title">
+            <h5><img data-icon src="/assets/icon/list.png" />今日榜单</h5>
+            <a href="./rank/main">查看更多</a>
+          </div>
+          <panel :list="list5" rank></panel>
         </div>
-        <panel :list="list5" rank></panel>
       </div>
       <div class="banner">
         <img :src="banner">
       </div>
-      <div class="container">
-        <div class="_title">
-          <h5>科普大事件</h5>
-        </div>
-        <div class="_news">
-          <img :src="banner">
-          <div>
-            <h5>{{news.title}}</h5>
-            <p>{{news.abstract}}</p>
-          </div>
-        </div>
-      </div>
       <div class="marginTop">
-        <meng-list />
+        <meng-list :data='mengListData' />
       </div>
       <mengbar type='discovery'></mengbar>
     </div>
@@ -46,6 +38,7 @@ import mengList from '@/components/mengList'
 import mengbar from '@/components/mengbar'
 
 import panelData from '@/data/panel'
+import mengListData from '@/data/mengList'
 
 export default {
   components: { search, panel, mengList, mengbar },
@@ -53,11 +46,12 @@ export default {
     return {
       list4: [panelData, panelData, panelData, panelData],
       list5: [panelData, panelData, panelData, panelData, panelData],
-      banner: 'http://img.self.com.cn/userfiles/201311/1385379601646_800X565.jpg',
+      banner: '/static/img/pic_shop.png',
       news: {
         title: '绝育',
         abstract: '详情'
-      }
+      },
+      mengListData: mengListData
     }
   }
 }
@@ -72,6 +66,7 @@ export default {
   width: 100%;
   bottom: @btm-height;
   overflow-y: scroll;
+  overflow-x: hidden;
   background: lighten(@gray, 8%);
 }
 
@@ -103,10 +98,11 @@ export default {
 
 .banner {
   margin-top: 10px;
+  height: 100px;
 
   img {
     width: 100%;
-    height: 100px;
+    height: 100%;
   }
 }
 
@@ -132,6 +128,14 @@ export default {
 
 .marginTop {
   margin-top: 10px;
+}
+.__today_list {
+  width: 100vw;
+  background: @white;
+
+  ._title {
+    padding-bottom: 13px;
+  }
 }
 </style>
 

@@ -1,25 +1,16 @@
 <template>
   <ul class="member">
     <li v-for="(item, index) in _getMember" :key="index">
-      <img :src="item" :style="_imgStyle" />
-      <div class="_other" :style="_imgStyle"
-        v-if="index === data.member.length - 1">
-        {{data.number - data.member.length}}
-      </div>
+      <img :src="item.head" />
+      <p class="__item_name">{{item.name}}</p>
     </li>
   </ul>
 </template>
 
 <script>
-import { createStyle } from '@/utils/utils'
-
 export default {
   props: {
-    data: Object,
-    size: {
-      type: Number,
-      default: 80
-    },
+    data: Array,
     max: {
       type: Number,
       default: 5
@@ -30,19 +21,9 @@ export default {
   },
   computed: {
     _getMember () {
-      return this.data.member.length < this.max
-        ? this.data.member
-        : this.data.member.slice(0, 5)
-    },
-    _imgStyle () {
-      let size = ~~(this.size / this.max)
-
-      return createStyle({
-        width: `${size}vw`,
-        height: `${size}vw`,
-        fontSize: `${size / 2}vw`,
-        lineHeight: `${size}vw`
-      })
+      return this.data.length < this.max
+        ? this.data
+        : this.data.slice(0, this.max)
     }
   }
 }
@@ -53,18 +34,18 @@ export default {
 
 .member {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
   padding: 10px 0 6px 0;
-  margin: 0 12px;
+  width: 100%;
 
   > li {
-    flex: 1;
+    width: 20%;
+    text-align: center;
     position: relative;
   }
 
   img {
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
   }
 
@@ -78,5 +59,10 @@ export default {
     background: rgba(0, 0, 0, 0.3);
     border-radius: 50%;
   }
+}
+.__item_name {
+  font-size: @font-mini;
+  line-height: @font-mini;
+  margin: 5px 0 10px 0;
 }
 </style>

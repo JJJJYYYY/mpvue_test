@@ -21,18 +21,19 @@ export default {
 </script>
 
 <style lang="less" scoped>
+@trans: transparent;
 ul {
   box-sizing: border-box;
-  border-top: 2px solid #000;
-  border-left: 2px solid #000;
+  border-top: 2px solid @trans;
+  border-left: 2px solid @trans;
 }
 li {
   width: 50%;
   height: 210px;
   float: left;
   box-sizing: border-box;
-  border-bottom: 2px solid #000;
-  border-right: 2px solid #000;
+  border-bottom: 2px solid @trans;
+  border-right: 2px solid @trans;
 }
 ._cover {
   width: 100%;

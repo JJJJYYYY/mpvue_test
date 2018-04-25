@@ -44,8 +44,6 @@ import mengbar from '@/components/mengbar'
 import info from '@/data/card'
 import family from '@/data/family'
 
-family.member.pop()
-
 export default {
   components: { mengCard, familyCard, nocard, mengbar },
   data () {

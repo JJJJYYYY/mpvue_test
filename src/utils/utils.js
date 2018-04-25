@@ -1,3 +1,5 @@
+import Hat from './wx'
+
 export function getRefByTags (node, tags) {
   let refs = {}
   node.$children.forEach(child => {
@@ -19,4 +21,14 @@ export function getRefByTags (node, tags) {
 
 export function createStyle (style) {
   return style ? Object.keys(style).map(key => `${key.replace(/([A-Z])/g, '-$1').toLowerCase()}:${style[key]};`).join('') : ''
+}
+
+let SystemInfo = null
+Hat.getSystemInfo().then(data => {
+  console.log(data)
+  SystemInfo = data
+})
+
+export function getPixelRatio () {
+  return SystemInfo.pixelRatio || 2
 }

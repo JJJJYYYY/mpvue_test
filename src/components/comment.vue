@@ -14,7 +14,7 @@
         <div class="__info" :style='_borderColor'>
           <div>{{item.date}}</div>
           <span>
-            <img class="icon_like" src="/static/img/icon_like.png" />
+            <img class="icon_like" src="/assets/icon/like.png" />
             <span class="like_number">{{item.likeNum}}</span>
           </span>
         </div>

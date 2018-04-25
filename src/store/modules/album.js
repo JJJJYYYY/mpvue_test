@@ -5,7 +5,8 @@ const album = {
     bgMusic: '',
     interval: 2,
     intro: '',
-    recorderManager: null
+    recorderManager: null,
+    texts: []
   },
   mutations: {
     mutationIntro (state, intro) {
@@ -28,6 +29,13 @@ const album = {
     },
     mutationRecorder (state, manager) {
       state.recorderManager = manager
+    },
+    mutationText (state, { i, text }) {
+      if (!Array.isArray(state.texts[i])) {
+        state.texts[i] = []
+      }
+      state.texts[i].push(text)
+      console.log(state)
     }
   }
 }

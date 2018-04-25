@@ -1,16 +1,16 @@
 <template>
   <div class="rank">
-    <div>
+    <div class="container">
       <div class="_title">
-        <h3>今日投食量榜单</h3>
-        <span>今日能量（克）</span>
+        <h5>今日投食量榜单</h5>
+        <span>今日能量 (克)</span>
       </div>
       <ul class="_list">
         <li v-for="(item, index) in list" :key="index">
           <i><span v-if="index > 2">{{index + 1}}</span></i>
           <img :src="item.head" />
           <p>{{item.name}}</p>
-          <span>{{item.power}}克</span>
+          <span class="__power">{{item.power}}克</span>
         </li>
       </ul>
     </div>
@@ -40,22 +40,19 @@ export default {
   right: 0;
   background: @primary;
   overflow-y: scroll;
-
-  > div {
-    margin: 20px 16px;
-    border-radius: 10px;
-    background: @white;
-  }
 }
-
+.container {
+  width: 94%;
+  border-radius: 6px;
+}
 ._list {
+  @list-size: 40px;
   > li {
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 10px 0;
     margin: 0 10px;
-    border-top: 1px solid @gray;
 
     i {
       width: 30px;
@@ -63,8 +60,8 @@ export default {
     }
 
     img {
-      width: 40px;
-      height: 40px;
+      width: @list-size;
+      height: @list-size;
       border-radius: 50%;
     }
 
@@ -75,25 +72,47 @@ export default {
   }
 
   > li {
+    i {
+      width: 20px;
+      height: @list-size;
+      line-height: @list-size;
+      background-size: 20px;
+      background-position: center;
+      background-repeat: no-repeat;
+      margin-right: 12px;
+    }
+
     &:nth-child(1) {
       i {
-        background: @gold;
-        height: 20px;
+        background-image: url(~@/assets/icon/gold_medal.png);
+      }
+
+      .__power {
+        color: #ff5057;
       }
     }
     &:nth-child(2) {
       i {
-        background: @silver;
-        height: 20px;
+        background-image: url(~@/assets/icon/sliver_medal.png);
+      }
+
+      .__power {
+        color: #ff5057;
       }
     }
     &:nth-child(3) {
       i {
-        background: @coppery;
-        height: 20px;
+        background-image: url(~@/assets/icon/copper_medal.png);
+      }
+
+      .__power {
+        color: #ff5057;
       }
     }
   }
+}
+.__power {
+  font-size: 14px;
 }
 
 ._title {

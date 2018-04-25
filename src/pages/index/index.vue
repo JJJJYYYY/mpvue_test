@@ -12,7 +12,7 @@
       <div class="_progress">
         <div>
           <div>
-            <img src="/static/img/icon_jar.png" />
+            <img src="/assets/icon/jar.png" />
           </div>
           <p>x{{22}}</p>
         </div>
