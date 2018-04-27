@@ -1,18 +1,23 @@
 <template>
   <div class="editor">
     <div class="_img_wrap">
-      <img :src="src" mode='widthFix'/>
-      <span class="__text"
-        v-for="(t, i) in text" :key='i'
-        @touchmove='moveText($event, t)'
-        :style="{
-          left: t.x + 'px',
-          top: t.y + 'px',
-          color: colorList[currColor].value
-        }"
-        >
-        {{t.text}}
-      </span>
+      <div>
+        <img class="_editor_img" :src="src" mode='widthFix'/>
+        <span class="__text"
+          v-for="(t, i) in text" :key='i'
+          @touchmove='moveText($event, t)'
+          @touchend='stopText($event, t)'
+          @touchcancel='stopText($event, t)'
+          @click="editText(t)"
+          :style="{
+            left: t.x + 'px',
+            top: t.y + 'px',
+            color: t.color
+          }"
+          >
+          {{t.text}}
+        </span>
+      </div>
     </div>
     <div class="_tool">
       <p class="_voice">
@@ -47,13 +52,18 @@
         <a class="__cancel">取消</a>
         <a class="__save">保存</a>
       </div>
+      <inputBox></inputBox>
     </div>
   </div>
 </template>
 
 <script>
 import { mapState, mapMutations } from 'vuex'
-// import { getPixelRatio } from '@/utils/utils'
+
+import { getRefByTags } from '@/utils/utils'
+
+import inputBox from '@/components/inputBox'
+// import { getSystemInfo } from '@/utils/utils'
 
 const colorList = [
   {
@@ -79,7 +89,10 @@ const colorList = [
   }
 ]
 
+let lastTouch = null
+
 export default {
+  components: { inputBox },
   data () {
     return {
       src: '',
@@ -87,7 +100,8 @@ export default {
       currColor: 0,
       recordTime: 0,
       colorList,
-      text: []
+      text: [],
+      currT: null
     }
   },
   mounted () {
@@ -97,6 +111,8 @@ export default {
 
     // 初始化文本
     this.text = this.texts[this.i] || []
+    lastTouch = null
+    Object.assign(this.$refs, getRefByTags(this, 'inputBox'))
   },
   unmouted () {
     this.src = ''
@@ -108,17 +124,45 @@ export default {
     ]),
     chooseColor (index) {
       this.currColor = index
+      this.currT.color = colorList[this.currColor].value
     },
-    addText () {
-      this.text.push({
+    async addText () {
+      let text = await this.$refs.inputBox.show()
+      this.currT = {
         x: 0,
         y: 0,
-        text: '请输入文本'
-      })
+        color: colorList[this.currColor].value,
+        text: text
+      }
+      this.text.push(this.currT)
     },
-    moveText ({ clientX, clientY }, t) {
-      t.x = clientX
-      t.y = clientY
+    moveText (e, t) {
+      if (lastTouch) {
+        let x = t.x + e.clientX - lastTouch.clientX
+        let y = t.y + e.clientY - lastTouch.clientY
+        if (x >= 0 && y >= 0) {
+          t.x = x
+          t.y = y
+        }
+      }
+      lastTouch = e
+    },
+    stopText () {
+      lastTouch = null
+    }, // todo: 样式调整，commit store
+    async editText (t) {
+      this.currT = t
+      this.currColor = colorList.findIndex(color => color.value === t.color)
+
+      t.text = await this.$refs.inputBox.show(t.text)
+    },
+    getImageInfo () {
+      wx.createSelectorQuery().select('._editor_img').fields({
+        size: true
+      }, res => {
+        res.width
+        res.height
+      }).exec()
     }
   },
   computed: {
@@ -143,13 +187,17 @@ export default {
   width: 100%;
   top: 0;
   bottom: @btm-height;
-
-  img {
+  >div {
     position: absolute;
     width: 100%;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    overflow: hidden;
+  }
+
+  img {
+    width: 100%;
   }
 }
 ._tool {

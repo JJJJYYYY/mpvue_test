@@ -2,9 +2,11 @@
   <div class="alert" v-show="visible">
     <div class="_body">
       <i v-if="showClose" @click="cancle">X</i>
-      <Icon type='success' color='pink' />
+      <Icon type='success' color='pink' v-if="!hasSlot" />
+      <slot></slot>
       <p>{{ text }}</p>
-      <a class="button" v-if="showConfirmButton"
+      <a class="button"
+        v-if="showConfirmButton"
         @click="confirm"
         >{{ confirmButtonText }}</a>
     </div>
@@ -49,6 +51,11 @@ export default {
       this.cancleCallback()
       this.visible = false
       this.cancleCallback = noop
+    }
+  },
+  computed: {
+    hasSlot () {
+      return !!this.$slots.default
     }
   }
 }
