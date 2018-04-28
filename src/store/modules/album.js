@@ -31,11 +31,7 @@ const album = {
       state.recorderManager = manager
     },
     mutationText (state, { i, text }) {
-      if (!Array.isArray(state.texts[i])) {
-        state.texts[i] = []
-      }
-      state.texts[i].push(text)
-      console.log(state)
+      state.texts[i] = text
     }
   }
 }

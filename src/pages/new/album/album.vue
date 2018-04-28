@@ -50,7 +50,7 @@
       </div>
     </div>
     <div class="_operation">
-      <!-- <a class="button btn-border disable" href="./preview/main">预览</a> -->
+      <a class="button btn-border disable" href="./preview/main">预览</a>
       <a
         @touchstart="startRecord"
         @touchend='stopRecord'
@@ -65,6 +65,7 @@
 
 <script>
 import Hat from '@/utils/wx'
+import Recorder from '@/utils/recorder'
 import { mapState, mapMutations } from 'vuex'
 
 import labelData from '@/data/label'
@@ -78,21 +79,21 @@ export default {
       startTime: 0,
       recordTime: 0,
       labels: [],
-      labelData
+      labelData,
+      recorderManager: null
     }
   },
   created () {
-    const recorderManager = wx.getRecorderManager()
-    this.mutationRecorder(recorderManager)
+    this.recorderManager = Recorder()
 
-    recorderManager.onStart(this.onStart)
-    recorderManager.onStop(this.onStop)
-    recorderManager.onError(this.onError)
+    Recorder.$on('start', this.onStart)
+    Recorder.$on('stop', this.onStop)
+    Recorder.$on('error', this.onError)
   },
   methods: {
     ...mapMutations([
-      'mutationIntro', 'mutationPics', 'mutationDelPic',
-      'mutationBgMusic', 'mutationInterval', 'mutationRecorder'
+      'mutationIntro', 'mutationPics',
+      'mutationDelPic', 'mutationBgMusic', 'mutationInterval'
     ]),
     async choosePic () {
       let { tempFilePaths } = await Hat.chooseImage({ count: 9 - this.pics.length })
@@ -153,8 +154,7 @@ export default {
       intro: state => state.albumState.intro,
       pics: state => state.albumState.pics,
       interval: state => state.albumState.interval,
-      bgMusic: state => state.albumState.bgMusic,
-      recorderManager: state => state.albumState.recorderManager
+      bgMusic: state => state.albumState.bgMusic
     })
   }
 }

@@ -1,6 +1,6 @@
 <template>
   <alert>
-    <input :focus='true' v-model.lazy="text" />
+    <input :focus='focus' v-model.lazy="text" />
   </alert>
 </template>
 
@@ -11,13 +11,18 @@ export default {
   components: { alert },
   data () {
     return {
-      text: ''
+      text: '',
+      focus: false
     }
   },
   methods: {
     show (text = '') {
       this.text = text
+      this.focus = true
       return this.$children[0].alert().then(() => this.text)
+    },
+    loseFocus () {
+      this.focus = false
     }
   }
 }

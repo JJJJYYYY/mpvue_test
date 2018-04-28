@@ -13,7 +13,7 @@ app.$mount()
 
 export default {
   config: {
-    pages: [ '^pages/new/album/editor/main' ],
+    pages: [ '^pages/new/album/main' ],
     window: {
       backgroundTextStyle: 'light',
       navigationBarBackgroundColor: '#000000',

@@ -7,7 +7,19 @@
       <swiper class="swiper" :autoplay="playing"
         :current="current" :interval="interval" @change="swiperChange">
         <swiper-item v-for="(item, index) in content.content" :key="index">
-          <img class="_image" :src='item.img' mode='widthFix'/>
+          <div>
+            <img class="_image" :src='item.img' mode='widthFix'/>
+            <span class="__text"
+              v-for="(t, i) in item.text" :key='i'
+              :style="{
+                left: t.x + '%',
+                top: t.y + '%',
+                color: t.color
+              }"
+              >
+              {{t.text}}
+            </span>
+          </div>
         </swiper-item>
       </swiper>
       <div class="menu absolute" v-if="!hideIcon">
@@ -146,6 +158,9 @@ export default {
 .menu {
   position: relative;
 }
+.meng {
+  height: 100%;
+}
 ._meng {
   position: absolute;
   width: 100vw;
@@ -252,5 +267,32 @@ img[data-icon] {
 }
 .__number {
   font-size: @font-sm;
+}
+
+swiper-item {
+  >div {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  img {
+    width: 100%;
+  }
+}
+
+.__text {
+  position: absolute;
+  font-size: 25px;
+  padding: 10px;
+  white-space: nowrap;
+
+  img {
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    top: -9px;
+    right: -9px;
+  }
 }
 </style>

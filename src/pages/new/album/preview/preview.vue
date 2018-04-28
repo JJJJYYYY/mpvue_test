@@ -1,6 +1,6 @@
 <template>
   <div class="preview">
-    <meng :content="getContent" :interal='interval' hideIcon />
+    <meng :content="get_content" :interal='interval' hideIcon />
   </div>
 </template>
 
@@ -12,22 +12,25 @@ export default {
   components: { meng },
   mounted () {
     this.$children[0].start()
+    console.log(this)
   },
   computed: {
     ...mapState({
       intro: state => state.albumState.intro,
       pics: state => state.albumState.pics,
       interval: state => state.albumState.interval * 1000,
-      bgMusic: state => state.albumState.bgMusic
+      bgMusic: state => state.albumState.bgMusic,
+      texts: state => state.albumState.texts
     }),
-    getContent () {
-      return {
+    get_content () {
+      return { // 提交没触发更新
         sound: this.bgMusic,
         intro: this.intro,
-        content: this.pics.map(pic => {
+        content: this.pics.map((pic, i) => {
           return {
             img: pic,
-            sound: ''
+            sound: '',
+            text: this.texts[i] || []
           }
         })
       }
@@ -39,5 +42,12 @@ export default {
 <style lang="less" scoped>
 .preview {
   background: #000;
+  height: 100vh;
 }
 </style>
+<style lang="less">
+._meng {
+  bottom: 0!important;
+}
+</style>
+
